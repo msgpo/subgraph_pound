@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+  apt-cacher-ng:
+    build: ./apt-cacher-ng
+    image: apt-cacher-ng
+    restart: always
+  live-builder:
+    build: ./livebuilder
+    image: livebuilder
+    volumes:
+      - ${VOLUME}
+    depends_on:
+      - "apt-cacher-ng"
+    privileged: true
